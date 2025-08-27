@@ -209,12 +209,13 @@ export function useReactMediaRecorder({
         setError("NO_RECORDER");
         setStatus("idle");
       };
-      mediaRecorder.current.start(5000);
+      mediaRecorder.current.start();
       setStatus("recording");
     }
   };
 
   const onRecordingActive = ({ data }: BlobEvent) => {
+    console.log("Pushing chunk: ", data)
     mediaChunks.current.push(data);
   };
 
