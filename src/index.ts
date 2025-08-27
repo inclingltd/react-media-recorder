@@ -215,8 +215,8 @@ export function useReactMediaRecorder({
   };
 
   const onRecordingActive = ({ data }: BlobEvent) => {
-    let chunks;
-    chunks = chunks ? chunks.concat(data) : [];
+    let [chunks] = mediaChunks.current;
+    chunks = chunks.concat(data);
     mediaChunks.current.push(URL.createObjectURL(new Blob(chunks, { type: chunks[0]?.type })));
   };
 
