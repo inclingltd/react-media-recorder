@@ -224,13 +224,13 @@ export function useReactMediaRecorder({
   };
 
   const onRecordingStop = () => {
-    const chunk = mediaChunks.current;
-    console.log(chunk);
+    const chunks = mediaChunks.current;
+    console.log(chunks);
     const blobProperty: BlobPropertyBag = Object.assign(
-      { type: chunk.type },
+      { type: chunks[0]?.type },
       blobPropertyBag || (video ? { type: "video/mp4" } : { type: "audio/wav" })
     );
-    const blob = new Blob(mediaChunks.current, blobProperty);
+    const blob = new Blob(chunks, blobProperty);
     const url = URL.createObjectURL(blob);
     setStatus("stopped");
     setMediaBlobUrl(url);
