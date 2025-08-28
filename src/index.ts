@@ -215,8 +215,9 @@ export function useReactMediaRecorder({
   };
 
   const onRecordingActive = ({ data }: BlobEvent) => {
+    console.log("Before push chunk: ", mediaChunks.current, data);
     mediaChunks.current.push(data);
-    console.log("Pushed chunk: ", mediaChunks.current)
+    console.log("Pushed chunk: ", mediaChunks.current);
   };
 
   const onRecordingStart = () => {
@@ -234,6 +235,7 @@ export function useReactMediaRecorder({
     const url = URL.createObjectURL(blob);
     setStatus("stopped");
     setMediaBlobUrl(url);
+    mediaChunks.current = [];
     onStop(url, blob);
   };
 
@@ -268,7 +270,7 @@ export function useReactMediaRecorder({
           mediaStream.current &&
             mediaStream.current.getTracks().forEach((track) => track.stop());
         }
-        mediaChunks.current = [];
+        // mediaChunks.current = [];
       }
     }
   };
