@@ -224,7 +224,7 @@ export function useReactMediaRecorder({
   };
 
   const onRecordingStop = () => {
-    const [chunk] = mediaChunks.current;
+    const chunk = mediaChunks.current;
     console.log(chunk);
     const blobProperty: BlobPropertyBag = Object.assign(
       { type: chunk.type },
