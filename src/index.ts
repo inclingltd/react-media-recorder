@@ -209,7 +209,7 @@ export function useReactMediaRecorder({
         setError("NO_RECORDER");
         setStatus("idle");
       };
-      mediaRecorder.current.start();
+      mediaRecorder.current.start(5000);
       setStatus("recording");
     }
   };
@@ -223,15 +223,16 @@ export function useReactMediaRecorder({
   };
 
   const onRecordingStop = () => {
-    const [chunk] = mediaChunks.current;
+    const chunks = mediaChunks.current;
     const blobProperty: BlobPropertyBag = Object.assign(
-      { type: chunk.type },
+      { type: chunks[0]?.type },
       blobPropertyBag || (video ? { type: "video/mp4" } : { type: "audio/wav" })
     );
-    const blob = new Blob(mediaChunks.current, blobProperty);
+    const blob = new Blob(chunks, blobProperty);
     const url = URL.createObjectURL(blob);
     setStatus("stopped");
     setMediaBlobUrl(url);
+    mediaChunks.current = [];
     onStop(url, blob);
   };
 
@@ -266,7 +267,6 @@ export function useReactMediaRecorder({
           mediaStream.current &&
             mediaStream.current.getTracks().forEach((track) => track.stop());
         }
-        mediaChunks.current = [];
       }
     }
   };
