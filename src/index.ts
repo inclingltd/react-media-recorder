@@ -209,7 +209,7 @@ export function useReactMediaRecorder({
         setError("NO_RECORDER");
         setStatus("idle");
       };
-      mediaRecorder.current.start(5000);
+      mediaRecorder.current.start(1000);
       setStatus("recording");
     }
   };
