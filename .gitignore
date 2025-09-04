@@ -51,6 +51,23 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
+# Ignore Yarn install state and build artifacts
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# ignore cache
+.yarn/cache
+
+# Yarn's install state
+.yarn-install-state.gz
+
+# Optional if you’re using Zero-Installs (disable if not)
+.yarn/unplugged
+
 # Yarn Integrity file
 .yarn-integrity
 
